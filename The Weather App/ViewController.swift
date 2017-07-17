@@ -9,93 +9,73 @@
 import UIKit
 
 class ViewController: UIViewController, UITextViewDelegate {
-
+    
     @IBOutlet weak var cityTextField: UITextField!
     
+    @IBOutlet weak var btnSubmit: UIButton!
     @IBOutlet weak var resultLabel: UILabel!
     
+    let urlBase:String = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22{QUERY}%22)%20and%20u%3D'c'&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback="
+    
+    
+    // asd
     
     @IBAction func getWeather(_ sender: Any) {
-    
-        if let url = URL(string:"http://www.weather-forecast.com/locations/" + cityTextField.text!.replacingOccurrences(of: " ", with: "-") + "/forecasts/latest") {
         
-        let request = NSMutableURLRequest(url: url)
+        
+        guard let textSearch = cityTextField.text else {
+            btnSubmit.isHidden = true
+            return
+        }
+        btnSubmit.isHidden = false
+        
+        
+        let urlQuery = urlBase.replacingOccurrences(of: "{QUERY}", with: textSearch)
+        
+        guard  let theURL = URL(string: urlQuery) else {
+            btnSubmit.isHidden = true
+            return
+        }
+        
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        self.resultLabel.text = ""
+        
+        let request = NSMutableURLRequest(url: theURL)
         
         let task = URLSession.shared.dataTask(with: request as URLRequest) {
             data, response, error in
             
-            var message = ""
-            
-            if error != nil {
+            DispatchQueue.main.async {
+                guard let data = data else { return }
+                let json = try! JSON(data: data)
                 
-                print(error)
-                
-            } else {
-                
-                if let unwrappedData = data {
-                    
-                    let dataString = NSString(data: unwrappedData, encoding: String.Encoding.utf8.rawValue)
-                    
-                    var stringSeparator = "Weather Forecast Summary:</b><span class=\"read-more-small\"><span class=\"read-more-content\"> <span class=\"phrase\">"
-                    
-                    if let contentArray = dataString?.components(separatedBy: stringSeparator) {
-                        
-                        if contentArray.count > 1 {
-                            
-                            stringSeparator = "</span>"
-                            
-                            let newContentArray = contentArray[1].components(separatedBy: stringSeparator)
-                            
-                            if newContentArray.count > 1 {
-                                
-                                message = newContentArray[0].replacingOccurrences(of: "&deg;C", with: "°")
-                                
-                                print(message)
-                                
-                            }
-                            
-                            
-                        }
-                        
-                    }
-                    
-                    
-                    
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                guard let temp = json["query"]["results"]["channel"]["item"]["condition"]["temp"].string else {
+                    // uyarı mesajı
+                    return
                 }
                 
-                if message == "" {
-                    
-                    message = "There weather there could't be found. Please try different city."
-                    
-                }
+                guard let currentTempInteger = Int(temp) else { return }
                 
-                DispatchQueue.main.sync(execute: {
-                    
-                    self.resultLabel.text = message
-                    
-                })
+                self.changeBackground(temp: currentTempInteger)
+                self.writeToLabel(str:temp)
                 
             }
             
         }
         
         task.resume()
-
-            
-        } else {
-        
-            resultLabel.text = "There weather there could't be found. Please try different city."
-        
-        }
-        
-        
     }
+    
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-            }
-
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -105,7 +85,7 @@ class ViewController: UIViewController, UITextViewDelegate {
         self.view.endEditing(true)
         
     }
-
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         cityTextField.resignFirstResponder()
@@ -114,4 +94,22 @@ class ViewController: UIViewController, UITextViewDelegate {
     
     
 }
+
+
+extension ViewController {
+    
+    
+    func writeToLabel(str:String) {
+        self.resultLabel.text = str
+    }
+    
+    func changeBackground(temp:Int) {
+        
+    }
+    
+}
+
+
+
+
 
