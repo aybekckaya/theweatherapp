@@ -15,7 +15,7 @@ class ViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var btnSubmit: UIButton!
     @IBOutlet weak var resultLabel: UILabel!
     
-    let urlBase:String = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22{QUERY}%22)%20and%20u%3D'c'&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback="
+    let urlBase:String = "https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='{QUERY}') and u='c'&format=json&diagnostics=true&env=store://datatables.org/alltableswithkeys&callback="
     
     
     // asd
@@ -29,8 +29,8 @@ class ViewController: UIViewController, UITextViewDelegate {
         }
         btnSubmit.isHidden = false
         
-        
-        let urlQuery = urlBase.replacingOccurrences(of: "{QUERY}", with: textSearch)
+       
+        guard let urlQuery = urlBase.replacingOccurrences(of: "{QUERY}", with: textSearch).addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed) else { return }
         
         guard  let theURL = URL(string: urlQuery) else {
             btnSubmit.isHidden = true
@@ -48,16 +48,13 @@ class ViewController: UIViewController, UITextViewDelegate {
             DispatchQueue.main.async {
                 guard let data = data else { return }
                 let json = try! JSON(data: data)
-                
+                print("json : \(json)")
                 UIApplication.shared.isNetworkActivityIndicatorVisible = false
                 guard let temp = json["query"]["results"]["channel"]["item"]["condition"]["temp"].string else {
-                    // location not found alert
-                    let alert = UIAlertController(title: "Something happened!", message: "The city should be located on Earth", preferredStyle: UIAlertControllerStyle.alert)
-                    alert.addAction(UIAlertAction(title: "Let me try again..", style: UIAlertActionStyle.default, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
+                    self.showPlaceNotFoundAlert()
                     return
                 }
-                //asd
+               
                 guard let currentTempInteger = Int(temp) else { return }
                 
                 self.changeBackground(temp: currentTempInteger)
@@ -103,13 +100,29 @@ extension ViewController {
     
     
     func writeToLabel(str:String) {
-        self.resultLabel.text = str
+        self.resultLabel.text = str+"\u{00B0}"
     }
     
     func changeBackground(temp:Int) {
         
     }
     
+    
+    
+}
+
+extension ViewController {
+    
+    func showPlaceNotFoundAlert() {
+        showAlert(title:"Something happened" , errorMessage: "The city should be located on Earth" , doneText:"Let me try again...")
+    }
+    
+    private func showAlert(title:String , errorMessage:String , doneText:String ) {
+        // location not found alert
+        let alert = UIAlertController(title: title, message: errorMessage, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: doneText, style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
 }
 
 

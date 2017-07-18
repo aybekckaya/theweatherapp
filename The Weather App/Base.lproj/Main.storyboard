@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -53,12 +53,12 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="equ-qx-bg2">
-                                <rect key="frame" x="16" y="274" width="288" height="70"/>
+                                <rect key="frame" x="16" y="236" width="288" height="70"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="288" id="EWu-6b-tHy"/>
                                     <constraint firstAttribute="height" constant="70" id="ZDk-PT-2F6"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="41"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -82,7 +82,7 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Qy3-b1-3Mn" secondAttribute="bottom" constant="422" id="UVB-A7-wvi"/>
                             <constraint firstItem="DGG-00-Ip3" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="16" id="UmS-EB-YFL"/>
                             <constraint firstItem="PiP-8b-MF2" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Vws-q2-c8G"/>
-                            <constraint firstItem="equ-qx-bg2" firstAttribute="top" secondItem="ehu-0F-j7y" secondAttribute="bottom" constant="52" id="YsY-4n-Cxd"/>
+                            <constraint firstItem="equ-qx-bg2" firstAttribute="top" secondItem="ehu-0F-j7y" secondAttribute="bottom" constant="14" id="YsY-4n-Cxd"/>
                             <constraint firstItem="ehu-0F-j7y" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="117" id="d99-UC-b2c"/>
                             <constraint firstItem="PiP-8b-MF2" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="e8u-5k-sAv"/>
                             <constraint firstItem="DGG-00-Ip3" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="52" id="kXJ-8N-1Fd"/>
@@ -94,6 +94,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnSubmit" destination="ehu-0F-j7y" id="zC5-8U-fSK"/>
                         <outlet property="cityTextField" destination="BMv-dn-ml2" id="ZH8-hw-zNq"/>
                         <outlet property="resultLabel" destination="equ-qx-bg2" id="eVn-0X-Hgl"/>
                     </connections>
