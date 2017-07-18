@@ -12,7 +12,8 @@
 		2422328F1F0946170077DE35 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2422328D1F0946170077DE35 /* Main.storyboard */; };
 		242232911F0946170077DE35 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 242232901F0946170077DE35 /* Assets.xcassets */; };
 		242232941F0946170077DE35 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 242232921F0946170077DE35 /* LaunchScreen.storyboard */; };
-		24F2EBCE1F094E3400FF7B54 /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 24F2EBCD1F094E3400FF7B54 /* background.jpg */; };
+		B3EE5CC31F1E1BE90042F54C /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3EE5CC21F1E1BE90042F54C /* SwiftyJSON.swift */; };
+		B3EE5CC51F1E1C3B0042F54C /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B3EE5CC41F1E1C3B0042F54C /* background.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,7 +24,8 @@
 		242232901F0946170077DE35 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		242232931F0946170077DE35 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		242232951F0946170077DE35 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		24F2EBCD1F094E3400FF7B54 /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpg; sourceTree = "<group>"; };
+		B3EE5CC21F1E1BE90042F54C /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		B3EE5CC41F1E1C3B0042F54C /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +58,24 @@
 		242232881F0946170077DE35 /* The Weather App */ = {
 			isa = PBXGroup;
 			children = (
+				B3EE5CC11F1E1B5F0042F54C /* SwiftyJSON */,
 				242232891F0946170077DE35 /* AppDelegate.swift */,
 				2422328B1F0946170077DE35 /* ViewController.swift */,
+				B3EE5CC41F1E1C3B0042F54C /* background.jpg */,
 				2422328D1F0946170077DE35 /* Main.storyboard */,
-				24F2EBCD1F094E3400FF7B54 /* background.jpg */,
 				242232901F0946170077DE35 /* Assets.xcassets */,
 				242232921F0946170077DE35 /* LaunchScreen.storyboard */,
 				242232951F0946170077DE35 /* Info.plist */,
 			);
 			path = "The Weather App";
+			sourceTree = "<group>";
+		};
+		B3EE5CC11F1E1B5F0042F54C /* SwiftyJSON */ = {
+			isa = PBXGroup;
+			children = (
+				B3EE5CC21F1E1BE90042F54C /* SwiftyJSON.swift */,
+			);
+			name = SwiftyJSON;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -128,7 +139,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				242232941F0946170077DE35 /* LaunchScreen.storyboard in Resources */,
-				24F2EBCE1F094E3400FF7B54 /* background.jpg in Resources */,
+				B3EE5CC51F1E1C3B0042F54C /* background.jpg in Resources */,
 				242232911F0946170077DE35 /* Assets.xcassets in Resources */,
 				2422328F1F0946170077DE35 /* Main.storyboard in Resources */,
 			);
@@ -141,6 +152,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3EE5CC31F1E1BE90042F54C /* SwiftyJSON.swift in Sources */,
 				2422328C1F0946170077DE35 /* ViewController.swift in Sources */,
 				2422328A1F0946170077DE35 /* AppDelegate.swift in Sources */,
 			);

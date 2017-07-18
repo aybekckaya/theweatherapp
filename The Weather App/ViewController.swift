@@ -18,7 +18,7 @@ class ViewController: UIViewController, UITextViewDelegate {
     let urlBase:String = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22{QUERY}%22)%20and%20u%3D'c'&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback="
     
     
-    // asd  
+    // asd
     
     @IBAction func getWeather(_ sender: Any) {
         
@@ -44,17 +44,20 @@ class ViewController: UIViewController, UITextViewDelegate {
         
         let task = URLSession.shared.dataTask(with: request as URLRequest) {
             data, response, error in
-            
+            // asd
             DispatchQueue.main.async {
                 guard let data = data else { return }
                 let json = try! JSON(data: data)
                 
                 UIApplication.shared.isNetworkActivityIndicatorVisible = false
                 guard let temp = json["query"]["results"]["channel"]["item"]["condition"]["temp"].string else {
-                    // uyarı mesajı
+                    // location not found alert
+                    let alert = UIAlertController(title: "Something happened!", message: "The city should be located on Earth", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "Let me try again..", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
                     return
                 }
-                
+                //asd
                 guard let currentTempInteger = Int(temp) else { return }
                 
                 self.changeBackground(temp: currentTempInteger)
@@ -108,7 +111,6 @@ extension ViewController {
     }
     
 }
-
 
 
 
